@@ -19,6 +19,7 @@ class Gaugan2Renderer:
         self.output_images = []
         chrome_options = Options()
         chrome_options.add_argument("--headless")
+        chrome_options.add_argument("window-size=1920,1080")
 
         self.driver = webdriver.Chrome(
             ChromeDriverManager().install(), options=chrome_options)
@@ -57,9 +58,9 @@ class Gaugan2Renderer:
 
     def render_image(self, file_path):
         self.driver.find_element(
-            By.XPATH, '//*[@id="segmapfile"]').send_keys(file_path)
+            By.XPATH, '//*[@id="realfile"]').send_keys(file_path)
         self.driver.find_element(
-            By.XPATH, '//*[@id="btnSegmapLoad"]').click()
+            By.XPATH, '//*[@id="btnRealLoad"]').click()
         self.driver.find_element(
             By.XPATH, '//*[@id="render"]').click()
 

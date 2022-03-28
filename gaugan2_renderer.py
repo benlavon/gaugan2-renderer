@@ -63,12 +63,23 @@ class Gaugan2Renderer:
         self.driver.find_element(
             By.XPATH, '//*[@id="render"]').click()
 
+    def check_image_input_utilization(self):
+        self.driver.find_element(
+            By.XPATH, '//*[@id="enable_image"]').click()
+
+    def uncheck_segmentation_input_utilization(self):
+        self.driver.find_element(
+            By.XPATH, '//*[@id="enable_seg"]').click()
+
     def run(self, input_folder, output_path):
         self.image_paths = glob(input_folder + "/*.png")
         self.output_path = output_path
 
         self.open()
         self.create_output_dir()
+
+        self.check_image_input_utilization()
+        self.uncheck_segmentation_input_utilization()
 
         for file_path in tqdm(self.image_paths):
             file_path = os.path.abspath(file_path)
